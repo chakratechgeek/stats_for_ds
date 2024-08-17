@@ -241,16 +241,4 @@ Kurtosis:                       2.484   Cond. No.                     1.61e+03
   - **X2 (0.0050):** For each unit increase in X2, Y is expected to increase by 0.005, holding X1 constant.
 - **Standard Error, t, P>|t|, [0.025, 0.975]:** These values show the reliability of the coefficients. For example, X1 has a very low p-value (0.001), making it a significant predictor
 - **Df Residuals** tells you how many observations are left after the model has "used up" some data to estimate the coefficients. These remaining observations are what's left to calculate the residuals (the differences between the observed and predicted values).
-  - **Low Df Residuals**:
-      - If Df Residuals is low, it means most of your data has been used to estimate the model parameters. This can be a sign that the model might be too complex for the amount of data you have. It reduces the reliability of your model because there aren't many data points left to check if the model predictions are accurate.
-      - Example: If you have 10 observations and you estimate 8 parameters, you only have 1 Df Residual left. That’s very little data to validate your model, which could lead to overfitting (the model fits the specific data too well but might not generalize to new data).
-
-  - **High Df Residuals**:
-      - If Df Residuals is high, you have more data left after estimating the model. This usually means the model is simpler relative to the amount of data, which can be good because it allows for a more reliable check on the model's accuracy.
-      - Example: If you have 100 observations and only estimate 3 parameters, you have 97 Df Residuals left, giving you plenty of data to test the model's predictions.
-### Applying to Any Dataset
-
-To apply OLS to any dataset, replace the `df`, `X`, and `Y` variables in the example with your dataset’s columns. Interpret the output in the same way, focusing on the key metrics (R-squared, p-values, coefficients) to understand the relationship between your predictors and the outcome.
-
-This should give you a solid foundation to analyze regression models using OLS with `statsmodels`.
-
+ 
