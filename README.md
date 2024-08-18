@@ -171,6 +171,94 @@ Ordinary Least Squares (OLS) is a type of linear regression used in statistics a
 
 14. **Confidence Intervals:** These provide a range within which the true value of the coefficient is expected to fall with a certain level of confidence (usually 95%).
 
+15. **Omnibus**:  The Omnibus test is a combined test for skewness and kurtosis. It tests the null hypothesis that the residuals (errors) of the model are normally distributed. Specifically, it combines the skewness and kurtosis of the residuals into a single test statistic.
+    - **Null Hypothesis (H₀)**: The residuals are normally distributed (i.e., the skewness and kurtosis are both zero).
+    - **Interpretation**:
+         - A significant Omnibus test (typically indicated by a low p-value, such as < 0.05) suggests that the residuals do not follow a normal distribution.
+17. **Prob Omnibus**: This is the p-value associated with the Omnibus test. It tells you the probability of observing the test statistic under the null hypothesis that the residuals are normally distributed.
+    - **Interpretation**:
+         - A p-value of 0.000 indicates that there is virtually no chance that the residuals are normally distributed. This suggests that the model's residuals deviate significantly from normality, which can be a concern in regression analysis because one of the assumptions of linear regression is that the residuals should be normally distributed.
+    - **Omnibus Statistic**: A higher value of the Omnibus statistic indicates a greater deviation from normality.
+    - **p-value (Prob(Omnibus))**: The p-value associated with the Omnibus test tells you the probability of observing the test statistic under the null hypothesis.
+    - **Ideal Values for the Omnibus Test**:
+         - **Omnibus Statistic**:
+            - **Near Zero**: Ideally, you want the Omnibus test statistic to be close to zero, which would indicate that the skewness and kurtosis of the residuals are close to what is expected under a normal   distribution. This suggests that the residuals are approximately normally distributed.
+         - **Prob(Omnibus) (p-value)**:
+            - **High p-value (> 0.05)**: A high p-value (typically above 0.05) suggests that the residuals are not significantly different from a normal distribution. This means you fail to reject the null hypothesis, indicating that the residuals likely follow a normal distribution.
+18. **Skewness**: Skewness measures the asymmetry of the distribution of residuals.
+    - **Skewness = 0**: Indicates a perfectly symmetrical distribution.
+    - **Positive Skew (> 0)**: Indicates that the right tail (larger values) of the distribution is longer or fatter than the left tail, meaning there are more extreme positive residuals.
+    - **Negative Skew (< 0)**: Indicates that the left tail (smaller values) is longer or fatter than the right tail, meaning there are more extreme negative residuals.
+
+     **Action**:
+      - If the skewness is causing issues in model performance or interpretation, you might consider transformations (e.g., logarithmic transformation) of the dependent variable to reduce skewness.
+      - If the skewness is mild (like in this case), it may not require immediate action, but it’s something to keep in mind, especially if other diagnostics suggest model issues.
+   
+19. **Kurtosis**: Kurtosis measures the "tailedness" of the distribution, indicating the presence of outliers.
+    - **Kurtosis = 3**: Indicates a normal distribution with medium tails (mesokurtic).
+    - **Kurtosis > 3**: Indicates heavier tails than a normal distribution (leptokurtic), meaning more outliers.
+    - **Kurtosis < 3**: Indicates lighter tails than a normal distribution (platykurtic), meaning fewer outliers.
+      
+    **Action**:
+    - No immediate action is typically required when kurtosis is slightly below 3. However, it’s important to continue monitoring other diagnostics to ensure that the overall model fit is adequate.
+20. **Durbin-Watson**: The Durbin-Watson (DW) statistic is a test statistic used in regression analysis to detect the presence of autocorrelation (specifically, first-order autocorrelation) in the residuals (errors) of the model.
+    **What is Autocorrelation?**
+
+    - **Autocorrelation**: Autocorrelation occurs when the residuals (errors) from a regression model are not independent of each other. In simpler terms, it means that the value of the residual at one time point is correlated with the value of the residual at another time point.
+    - **First-Order Autocorrelation**: This specifically refers to the correlation between consecutive residuals.
+    - **Durbin-Watson ≈ 2**: No autocorrelation (the residuals are independent).
+    - **Durbin-Wtson < 2**: Positive autocorrelation (the residuals are positively correlated).
+    - **Durbin-Watson > 2**: Negative autocorrelation (the residuals are negatively correlated).
+      
+    **When to Take Action**:
+   
+      - **Durbin-Watson < 1.5**: Indicates potential positive autocorrelation, which may require further investigation or adjustment, such as using time-series models or adding lagged variables.
+      - **Durbin-Watson > 2.5**: Indicates potential negative autocorrelation, which might also require investigation, although it's generally less problematic than positive autocorrelation.
+
+21. **Jarque-Bera (JB) Test**: is a statistical test that is used to determine whether the residuals (errors) of a regression model are normally distributed. It specifically assesses the skewness and kurtosis of the residuals to see if they deviate from what is expected under a normal distribution.
+    - **Null Hypothesis (H₀)**: The residuals are normally distributed (skewness = 0, kurtosis = 3).
+    - **JB Statistic**: The larger the JB statistic, the greater the deviation from normality.
+         - **High JB Statistic**: Suggests significant deviation from normality.
+         - **Low JB Statistic**: Suggests that the residuals are closer to a normal distribution.
+     
+22. **p-value (Prob(JB))**: The p-value associated with the JB statistic indicates the probability that the residuals are normally distributed.
+    - **High p-value (> 0.05)**: Fail to reject the null hypothesis; the residuals are likely normally distributed.
+    - **Low p-value (< 0.05)**: Reject the null hypothesis; the residuals are not normally distributed.
+   
+**The Omnibus test is a more general test that evaluates overall normality, while the Jarque-Bera test focuses more specifically on matching the skewness and kurtosis of residuals to those of a normal distribution.**
+
+23. **Condition Number (Cond. No.)**: The Condition Number (often abbreviated as Cond. No.) is a diagnostic measure used in regression analysis to assess the sensitivity of the model's predictions to changes in the input data. It is particularly useful for detecting multicollinearity, which occurs when two or more independent variables in the model are highly correlated.
+24. 
+    **What It Represents**:
+      - The Condition Number is a ratio that measures the sensitivity of the output of a model to small changes in the input. In regression, it specifically relates to how much the solution (i.e., the regression coefficients) can change in response to changes in the independent variables.
+      - **High Condition Number**: Indicates potential multicollinearity, where small changes in the input data can lead to large changes in the model coefficients. This makes the model unstable and less reliable.
+      - **Low Condition Number**: Suggests that the model is stable, and the independent variables are not highly correlated.
+      - 
+    **Interpreting the Condition Number**:
+      - **Cond. No. < 30**: Generally indicates that there is little to no multicollinearity among the independent variables. The model is considered stable.
+      - **Cond. No. between 30 and 100**: Suggests moderate multicollinearity, which could lead to some instability in the coefficient estimates.
+      - **Cond. No. > 100**: Indicates strong multicollinearity, which could make the model coefficients unreliable and suggest that the independent variables are highly correlated.
+        
+    **What to Do About High Condition Number**:
+    If the Condition Number is high (as in your case), here are some steps you can take to address potential multicollinearity:
+
+    - **Examine the Correlation Matrix**:
+         - Check the correlation matrix of the independent variables to identify pairs of variables that are highly correlated.
+         - Consider removing or combining highly correlated variables.
+           
+    - **Variance Inflation Factor (VIF)**:
+         - Calculate the Variance Inflation Factor (VIF) for each independent variable. VIF values above 10 typically indicate high multicollinearity.
+         - Consider removing variables with high VIFs to reduce multicollinearity.
+           
+    - **Principal Component Analysis (PCA)**:
+         - Apply Principal Component Analysis to reduce the dimensionality of the data, which can help to mitigate multicollinearity by creating new uncorrelated variables (principal components).
+           
+    - **Regularization Techniques**:
+         - Consider using regularization methods like Ridge regression or Lasso regression, which can help reduce the impact of multicollinearity by shrinking the coefficients of correlated variables.
+           
+    - **Drop Redundant Variables**:
+         - If certain variables are redundant or add little new information to the model, consider removing them to improve model stability.
+         - 
 ### Example: Interpreting OLS Results with `statsmodels`
 
 Let's walk through an example using the `statsmodels` library.
